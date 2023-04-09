@@ -13,5 +13,7 @@
             "name": "adsad"
         }
     ],
-    "require": {}
+    "require": {
+        "symfony/http-foundation": "^6.2"
+    }
 }
