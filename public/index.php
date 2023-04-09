@@ -1,13 +1,14 @@
 <?php
 
-require __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
-use App\Core\Config;
-use App\Core\Router;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-$config = new Config();
-$config->load(__DIR__.'/../config/config.php');
+$request = Request::createFromGlobals();
 
-$router = new Router();
-$router->load(__DIR__.'/../app/routes.php');
-$router->dispatch();
+$name = $request->query->get('name', 'Woererld');
+
+$response = new Response(sprintf('Hello %s', htmlspecialchars($name, ENT_QUOTES, 'UTF-8')));
+
+$response->send();
