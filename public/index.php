@@ -3,12 +3,13 @@
 require_once __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+
+$routes = include __DIR__.'/../src/routes.php';
+
+$container = include __DIR__.'/../src/core/container.php';
 
 $request = Request::createFromGlobals();
 
-$name = $request->query->get('name', 'Woererld');
-
-$response = new Response(sprintf('Hello %s', htmlspecialchars($name, ENT_QUOTES, 'UTF-8')));
+$response = $container->get('framework')->handle($request);
 
 $response->send();
